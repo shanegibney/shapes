@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Javascript General</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <hr>
+  <canvas id='canvas1' width="500" height="250" style='border:2px dotted #FF0000;'></canvas>ctx<br>
+  <input id="canvasCircle" type="button" value="circle" onclick="circle();"/>
+  <p id="displaycircle"></p>
+  <input id="canvasSquare" type="button" value="square" onclick="square();"/>
+  <p id="displaysquare"></p>
+  <input id="canvasRectangle" type="button" value="rectangle" onclick="rectangle();"/>
+  <p id="displayrectangle"></p>
+  <input id="canvasEllipse" type="button" value="ellipse" onclick="ellipse();"/>
+  <p id="displayellipse"></p>
+  <input id="canvasLine" type="button" value="line" onclick="line();"/>
+  <p id="displayline"></p>
+  <hr>
+
+<script>
+
+
+const canvas = document.getElementById("canvas1");
+const ctx = canvas.getContext("2d"); 
+
+function circle() {
+  //generate coordinates
+  let circleRadius = 20;//radius of circle
+  let circleXCoor = generateRandomInteger(circleRadius,canvas.width-circleRadius);
+  let circleYCoor = generateRandomInteger(circleRadius,canvas.height-circleRadius);
+  //document.getElementById("circlexcoor").innerHTML = circlexcoor;
+  //document.getElementById("circleycoor").innerHTML = circleycoor;
+  shape[0] = circleXCoor;
+  shape[1] = circleYCoor;
+  shape[2] = circleRadius;//radius of circle
+  draw();
+}
+
+function square() {
+  //generate coordinates
+  let squareWidth = 30;// width of square 
+  let squareHeight = squareWidth;// height of square
+let squareXCoor = generateRandomInteger(1,canvas.width-squareWidth);
+let squareYCoor = generateRandomInteger(1,canvas.height-squareHeight);
+shape[3] = squareXCoor;
+shape[4] = squareYCoor;
+shape[5] = squareWidth;
+shape[6] = shape[5];
+draw();
+}
+
+function rectangle() {
+  //generate coordinates
+  let rectangleWidth = 30;// width of square 
+  let rectangleHeight = 60;// height of square
+let rectangleXCoor = generateRandomInteger(1,canvas.width-rectangleWidth);
+let rectangleYCoor = generateRandomInteger(1,canvas.height-rectangleHeight);
+shape[7] = rectangleXCoor;
+shape[8] = rectangleYCoor;
+shape[9] = rectangleWidth;
+shape[10] = rectangleHeight;
+draw();
+}
+
+function ellipse() {
+  //generate coordinates
+  let ellipseradiusx = 10;// radiusx of circle
+  let ellipseradiusy = 20;// radiusy of circle
+  let ellipseXCoor = generateRandomInteger(0,canvas.width-ellipseradiusx);
+  let ellipseYCoor = generateRandomInteger(0,canvas.height-ellipseradiusy);
+  shape[11] = ellipseXCoor;
+  shape[12] = ellipseYCoor;
+  shape[13] = ellipseradiusx;//radiusx of circle
+  shape[14] = ellipseradiusy;//radiusy of circle
+  draw();
+}
+
+function line() {
+  //generate coordinates
+  let startLineX = generateRandomInteger(0,canvas.width-(10/2));
+  let startLineY = generateRandomInteger(0,canvas.height-(30/2));
+let LineX = 10;
+let LineY = 30;
+  let finishLineX = startLineX + LineX;
+let finishLineY = startLineY + LineY;
+shape[15] = startLineX;
+shape[16] = startLineY;
+shape[17] = LineX;
+shape[18] = LineY;
+draw();
+}
+
+function draw(){//called in the circle() and square() functions above.
+  document.getElementById("displaycircle").innerHTML = 'circle = [ x-coordinate = ' + shape[0] + ',  y-coodinate = ' + shape[1] + ', radius =' + shape[2] + ']' ;
+  document.getElementById("displaysquare").innerHTML = 'square = [ x-coordinate =' + shape[3] + ', y-coordinate = ' + shape[4] + ', width = ' + shape[5] + ', height = ' + shape[6] + ']' ;
+  document.getElementById("displayrectangle").innerHTML = 'rectangle = [ x-coordinate = ' + shape[7] + ', y-coorinate = '  + shape[8] + ', width = ' + shape[9] + ', height = ' + shape[10] + ']' ;
+  document.getElementById("displayellipse").innerHTML = 'ellipse = [ x-coordinate = ' + shape[11] + ', y-coordinate = ' + shape[12] + ', width = ' + shape[13] + ', height = ' + shape[14] + ']' ;
+  document.getElementById("displayline").innerHTML = 'line = [ x-coordinate = ' + shape[15] + ', y-coordinate = ' + shape[16] + ', width = ' + shape[17] + ', height = ' + shape[18] + ']' ;
+
+  //Clear all
+ctx.beginPath();
+ctx.fillStyle = "lightblue";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fill();
+ctx.closePath();
+//Draw red circle
+ctx.beginPath();
+ctx.fillStyle = "red";
+ctx.arc(shape[0], shape[1], shape[2], 0, 2 * Math.PI);
+ctx.fill();
+ctx.closePath();
+
+//Draw blue square
+ctx.beginPath();
+ctx.fillStyle = "blue";
+ctx.fillRect(shape[3],shape[4],shape[5],shape[6]);
+ctx.fill();
+ctx.closePath();
+
+//Draw yellow rectangle
+ctx.beginPath();
+ctx.fillStyle = "yellow";
+ctx.fillRect(shape[7],shape[8],shape[9],shape[10]);
+ctx.fill();
+ctx.closePath();
+
+//Draw green ellipse
+ctx.beginPath();
+ctx.fillStyle = "green";
+ctx.ellipse(shape[11], shape[12], shape[13], shape[14], Math.PI / 4, 0, 2 * Math.PI);
+ctx.fill();
+ctx.closePath();
+
+//Draw orange line
+ctx.beginPath();
+//line width
+ctx.lineWidth = 4;
+ctx.moveTo(shape[15], shape[16]); 
+ctx.lineTo(shape[15] + shape[17], shape[16] + shape[18]); 
+ctx.strokeStyle = 'orange';
+ctx.stroke();
+ctx.closePath();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+  </body>
+  </html>
